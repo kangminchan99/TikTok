@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
 
 void main() {
@@ -15,8 +16,21 @@ class TikTokApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // 틱톡 시그니처 색상
+        // 기본 배경색 전역 설정
+        scaffoldBackgroundColor: Colors.white,
+        // 틱톡 시그니처 색상 전역 설정
         primaryColor: Color(0xFFE9435A),
+        // 앱바 테마 전역 설정
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            fontSize: Sizes.size16 + Sizes.size2,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       home: SignUpScreen(),
     );
