@@ -1,10 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok/constants/gaps.dart';
+import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/features/authentication/widgets/form_button.dart';
 
-class LoginFormScreen extends StatelessWidget {
+class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
 
   @override
+  State<LoginFormScreen> createState() => _LoginFormScreenState();
+}
+
+class _LoginFormScreenState extends State<LoginFormScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Map<String, String> formDate = {};
+
+  void _onSubmitTap() {
+    if (_formKey.currentState != null) {
+      if (_formKey.currentState!.validate()) {
+        // 폼이 유효한 경우 텍스트 폼 필드의 onSaved에 저장
+        _formKey.currentState!.save();
+
+        print(formDate);
+      }
+    }
+  }
+
+  void _onScaffoldTap() {
+    // 키보드 내리기
+    FocusScope.of(context).unfocus();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GestureDetector(
+      onTap: _onScaffoldTap,
+      child: Scaffold(
+        appBar: AppBar(title: Text('Log in')),
+        body: Padding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: Sizes.size36),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Gaps.v28,
+                TextFormField(
+                  validator: (value) {
+                    return null;
+                  },
+
+                  decoration: InputDecoration(hintText: 'Email'),
+                  onSaved: (newValue) {
+                    if (newValue != null) {
+                      formDate['email'] = newValue;
+                    }
+                  },
+                ),
+                Gaps.v16,
+                TextFormField(
+                  validator: (value) {
+                    return null;
+                  },
+                  decoration: InputDecoration(hintText: 'Password'),
+                  onSaved: (newValue) {
+                    if (newValue != null) {
+                      formDate['password'] = newValue;
+                    }
+                  },
+                ),
+                Gaps.v28,
+                FormButton(disabled: false, onTap: () => _onSubmitTap()),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
