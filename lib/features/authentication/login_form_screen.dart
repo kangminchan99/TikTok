@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/widgets/form_button.dart';
+import 'package:tiktok/features/onboarding/interests_screen.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -20,8 +21,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       if (_formKey.currentState!.validate()) {
         // 폼이 유효한 경우 텍스트 폼 필드의 onSaved에 저장
         _formKey.currentState!.save();
-
-        print(formDate);
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => InterestsScreen()));
       }
     }
   }
@@ -46,6 +48,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 Gaps.v28,
                 TextFormField(
                   validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return 'Please wrtie your email';
+                    }
                     return null;
                   },
 

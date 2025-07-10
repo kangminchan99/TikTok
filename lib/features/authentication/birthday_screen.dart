@@ -44,7 +44,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign up'), scrolledUnderElevation: 0),
+      appBar: AppBar(title: Text('Sign up')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.size36),
         child: Column(
