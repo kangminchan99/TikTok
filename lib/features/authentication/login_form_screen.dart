@@ -21,9 +21,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       if (_formKey.currentState!.validate()) {
         // 폼이 유효한 경우 텍스트 폼 필드의 onSaved에 저장
         _formKey.currentState!.save();
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (context) => InterestsScreen()));
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => InterestsScreen()),
+          (route) => false, // 모든 이전 라우트를 제거
+        );
       }
     }
   }

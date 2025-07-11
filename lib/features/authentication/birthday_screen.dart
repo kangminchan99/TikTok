@@ -31,9 +31,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   }
 
   void _onNextTap() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => InterestsScreen()));
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => InterestsScreen()),
+      (route) => false, // 모든 이전 라우트를 제거
+    );
   }
 
   void _setTextFieldDate(DateTime date) {
