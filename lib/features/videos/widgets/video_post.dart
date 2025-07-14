@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/videos/widgets/video_button.dart';
+import 'package:tiktok/features/videos/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -72,7 +73,9 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    if (info.visibleFraction == 1 &&
+        !_isPaused &&
+        !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
   }
@@ -90,6 +93,21 @@ class _VideoPostState extends State<VideoPost>
     setState(() {
       _isPaused = !_isPaused;
     });
+  }
+
+  void _onCommentTap() async {
+    if (_videoPlayerController.value.isPlaying) {
+      _onTogglePause();
+    }
+    await showModalBottomSheet(
+      context: context,
+      // isScrollControlled - bottom sheet안에 listview를 사용할 경우 isScrollControlled를 true로 설정
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => VideoComments(),
+    );
+
+    _onTogglePause();
   }
 
   @override
@@ -173,7 +191,13 @@ class _VideoPostState extends State<VideoPost>
                 Gaps.v24,
                 VideoButton(icon: FontAwesomeIcons.solidHeart, text: '2.9M'),
                 Gaps.v24,
-                VideoButton(icon: FontAwesomeIcons.solidComment, text: '33K'),
+                GestureDetector(
+                  onTap: _onCommentTap,
+                  child: VideoButton(
+                    icon: FontAwesomeIcons.solidComment,
+                    text: '33K',
+                  ),
+                ),
                 Gaps.v24,
                 VideoButton(icon: FontAwesomeIcons.share, text: 'Share'),
               ],
