@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -17,14 +19,30 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost> {
-  final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset('assets/videos/zzanggu.mp4');
+class _VideoPostState extends State<VideoPost>
+    with SingleTickerProviderStateMixin {
+  late final VideoPlayerController _videoPlayerController;
+
+  bool _isPaused = false;
+
+  final Duration _animataionDuration = Duration(milliseconds: 300);
+
+  late final AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
     _initVideoPlayer();
+    _animationController = AnimationController(
+      vsync: this,
+      lowerBound: 1.0,
+      upperBound: 1.5,
+      value: 1.5,
+      duration: _animataionDuration,
+    );
+    // _animationController.addListener(() {
+    //   setState(() {});
+    // });
   }
 
   void _onVideoChange() {
@@ -38,9 +56,13 @@ class _VideoPostState extends State<VideoPost> {
   }
 
   void _initVideoPlayer() async {
+    _videoPlayerController = VideoPlayerController.asset(
+      'assets/videos/zzanggu.mp4',
+    );
     await _videoPlayerController.initialize();
-    setState(() {});
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
+    setState(() {});
   }
 
   @override
@@ -55,12 +77,19 @@ class _VideoPostState extends State<VideoPost> {
     }
   }
 
+  // 처음에 아이콘이 1.5였다가 멈추면 1.0으로 줄어들고, 다시 재생하면 1.5로 커지는 애니메이션
   void _onTogglePause() {
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
+      // reverse() - lower bound에서 설정한 값으로 애니메이션 한다.
+      _animationController.reverse();
     } else {
       _videoPlayerController.play();
+      _animationController.forward();
     }
+    setState(() {
+      _isPaused = !_isPaused;
+    });
   }
 
   @override
@@ -82,12 +111,72 @@ class _VideoPostState extends State<VideoPost> {
             // IgnorePointer - 클릭 시 이벤트가 해당 위젯으로 가지 않는다.
             child: IgnorePointer(
               child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.play,
-                  color: Colors.white,
-                  size: Sizes.size52,
+                child: AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _animationController.value,
+                      // 아래 AnimatedOpacity를 넘겨준다.
+                      child: child,
+                    );
+                  },
+
+                  child: AnimatedOpacity(
+                    duration: _animataionDuration,
+                    opacity: _isPaused ? 1 : 0,
+                    child: FaIcon(
+                      FontAwesomeIcons.play,
+                      color: Colors.white,
+                      size: Sizes.size52,
+                    ),
+                  ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 30,
+            left: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '@Minchan',
+                  style: TextStyle(
+                    fontSize: Sizes.size20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Gaps.v10,
+                Text(
+                  'This is zzangu',
+                  style: TextStyle(fontSize: Sizes.size16, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                    'https://avatars.githubusercontent.com/u/114412280?v=4',
+                  ),
+                  child: Text('민찬'),
+                ),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.solidHeart, text: '2.9M'),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.solidComment, text: '33K'),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.share, text: 'Share'),
+              ],
             ),
           ),
         ],

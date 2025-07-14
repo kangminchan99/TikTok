@@ -30,6 +30,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   }
 
   void _onVideoFinished() {
+    return;
     _pageController.nextPage(duration: _scrollDuration, curve: _scrollCurve);
   }
 
@@ -39,16 +40,29 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     super.dispose();
   }
 
+  Future<void> _onRefresh() {
+    return Future.delayed(Duration(seconds: 5));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: _pageController,
-      scrollDirection: Axis.vertical,
-      itemCount: _itemCount,
-      // onPageChanged - 현재 페이지 인덱스 위치를 알 수 있다.
-      onPageChanged: _onPageChanged,
-      itemBuilder: (context, index) =>
-          VideoPost(onVideoFinished: _onVideoFinished, index: index),
+    return RefreshIndicator(
+      onRefresh: _onRefresh,
+      // refresh Icon 돌아가는 위치
+      displacement: 50,
+      // refreshIndicator가 화면에 나타날 때 시작점
+      edgeOffset: 20,
+      backgroundColor: Colors.black,
+      color: Theme.of(context).primaryColor,
+      child: PageView.builder(
+        controller: _pageController,
+        scrollDirection: Axis.vertical,
+        itemCount: _itemCount,
+        // onPageChanged - 현재 페이지 인덱스 위치를 알 수 있다.
+        onPageChanged: _onPageChanged,
+        itemBuilder: (context, index) =>
+            VideoPost(onVideoFinished: _onVideoFinished, index: index),
+      ),
     );
   }
 }
