@@ -78,6 +78,10 @@ class _VideoPostState extends State<VideoPost>
         !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
+
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
+      _onTogglePause();
+    }
   }
 
   // 처음에 아이콘이 1.5였다가 멈추면 1.0으로 줄어들고, 다시 재생하면 1.5로 커지는 애니메이션

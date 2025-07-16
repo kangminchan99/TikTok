@@ -20,7 +20,10 @@ class TikTokApp extends StatelessWidget {
       theme: ThemeData(
         // 기본 배경색 전역 설정
         scaffoldBackgroundColor: Colors.white,
-
+        textSelectionTheme: TextSelectionThemeData(
+          // 커서 색 설정
+          cursorColor: Color(0xFFE9435A),
+        ),
         // 틱톡 시그니처 색상 전역 설정
         primaryColor: Color(0xFFE9435A),
         // 앱바 테마 전역 설정
