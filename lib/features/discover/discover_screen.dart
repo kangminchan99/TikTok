@@ -41,7 +41,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          elevation: 1,
           title: CupertinoSearchTextField(
             controller: _textEditingController,
             onChanged: _onSearchChanged,

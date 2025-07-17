@@ -24,6 +24,9 @@ class TikTokApp extends StatelessWidget {
           // 커서 색 설정
           cursorColor: Color(0xFFE9435A),
         ),
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         // 틱톡 시그니처 색상 전역 설정
         primaryColor: Color(0xFFE9435A),
         // 앱바 테마 전역 설정
