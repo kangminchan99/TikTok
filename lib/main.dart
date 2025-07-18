@@ -3,6 +3,7 @@ import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
+import 'package:tiktok/features/videos/inbox/activity_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -24,7 +25,6 @@ class TikTokApp extends StatelessWidget {
           // 커서 색 설정
           cursorColor: Color(0xFFE9435A),
         ),
-        splashFactory: NoSplash.splashFactory,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         // 틱톡 시그니처 색상 전역 설정
@@ -42,7 +42,7 @@ class TikTokApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MainNavigationScreen(),
+      home: ActivityScreen(),
     );
   }
 }
