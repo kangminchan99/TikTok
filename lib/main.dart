@@ -33,6 +33,8 @@ class TikTokApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
+          shadowColor: Colors.white,
+          surfaceTintColor: Colors.white,
           elevation: 0,
           scrolledUnderElevation: 0,
           titleTextStyle: TextStyle(
@@ -42,7 +44,7 @@ class TikTokApp extends StatelessWidget {
           ),
         ),
       ),
-      home: ActivityScreen(),
+      home: MainNavigationScreen(),
     );
   }
 }

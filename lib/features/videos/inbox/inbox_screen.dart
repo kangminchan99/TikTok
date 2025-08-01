@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/videos/inbox/activity_screen.dart';
+import 'package:tiktok/features/videos/inbox/chats_screen.dart';
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
 
-  void _onDmPressed() {}
+  void _onDmPressed(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => ChatsScreen()));
+  }
 
   void _onActivityTap(BuildContext context) {
     Navigator.of(
@@ -18,12 +23,14 @@ class InboxScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Text('Inbox'),
         actions: [
           IconButton(
-            onPressed: _onDmPressed,
+            onPressed: () => _onDmPressed(context),
             icon: FaIcon(FontAwesomeIcons.paperPlane),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
