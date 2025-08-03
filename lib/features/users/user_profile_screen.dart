@@ -4,6 +4,7 @@ import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/users/widgets/persistent_tab_bar.dart';
 import 'package:tiktok/features/users/widgets/user_account.dart';
+import 'package:tiktok/features/users/widgets/user_icon_button.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -87,23 +88,38 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                     ),
                     Gaps.v14,
-                    FractionallySizedBox(
-                      widthFactor: 0.33,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: Sizes.size12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(Sizes.size4),
-                        ),
-                        child: Text(
-                          'Follow',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: Sizes.size12 + Sizes.size1,
+                            horizontal: MediaQuery.of(context).size.width / 6.5,
                           ),
-                          textAlign: TextAlign.center,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(Sizes.size4),
+                          ),
+                          child: Text(
+                            'Follow',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
+                        Gaps.h5,
+                        UserIconButton(
+                          onTap: () {},
+                          icon: FontAwesomeIcons.youtube,
+                        ),
+                        Gaps.h5,
+                        UserIconButton(
+                          onTap: () {},
+                          icon: FontAwesomeIcons.chevronDown,
+                        ),
+                      ],
                     ),
                     Gaps.v14,
                     Padding(
@@ -137,61 +153,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 delegate: PersistentTabBar(),
                 pinned: true,
               ),
-
-              // SliverAppBar(
-              //   // 앱바가 중간에 나올 수 있게 함
-              //   // floating: true,
-              //   // 앱바의 배경 색깔과 flexible space bar의 title을 보여줌
-              //   pinned: true,
-              //   stretch: true,
-              //   collapsedHeight: 80,
-              //   expandedHeight: 200,
-              //   backgroundColor: Colors.teal,
-              //   flexibleSpace: FlexibleSpaceBar(
-              //     stretchModes: [
-              //       // StretchMode.blurBackground,
-              //       StretchMode.zoomBackground,
-              //     ],
-              //     background: Image.asset(
-              //       'assets/images/ping9.png',
-              //       fit: BoxFit.cover,
-              //     ),
-              //     title: Text('hello'),
-              //   ),
-              // ),
-              // SliverToBoxAdapter(
-              //   child: Column(
-              //     children: [CircleAvatar(backgroundColor: Colors.red, radius: 20)],
-              //   ),
-              // ),
-              // SliverFixedExtentList(
-              //   delegate: SliverChildBuilderDelegate(
-              //     childCount: 50,
-              //     (context, index) => Container(
-              //       alignment: Alignment.center,
-              //       color: Colors.teal[100 * (index % 9)],
-              //       child: Text('Item $index'),
-              //     ),
-              //   ),
-              //   itemExtent: 100,
-              // ),
-              // SliverPersistentHeader(delegate: CustomDelegate(), pinned: true),
-              // SliverGrid(
-              //   delegate: SliverChildBuilderDelegate(
-              //     childCount: 50,
-              //     (context, index) => Container(
-              //       alignment: Alignment.center,
-              //       color: Colors.amber[100 * (index % 9)],
-              //       child: Text('Item $index'),
-              //     ),
-              //   ),
-              //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              //     maxCrossAxisExtent: 100,
-              //     mainAxisSpacing: Sizes.size20,
-              //     crossAxisSpacing: Sizes.size20,
-              //     childAspectRatio: 1,
-              //   ),
-              // ),
             ];
           },
           body: TabBarView(
@@ -214,11 +175,37 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   children: [
                     AspectRatio(
                       aspectRatio: 9 / 14,
-                      child: FadeInImage.assetNetwork(
-                        fit: BoxFit.cover,
-                        placeholder: "assets/images/ping9.png",
-                        image:
-                            'https://avatars.githubusercontent.com/u/114412280?v=4',
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          FadeInImage.assetNetwork(
+                            fit: BoxFit.cover,
+                            placeholder: "assets/images/ping9.png",
+                            image:
+                                'https://avatars.githubusercontent.com/u/114412280?v=4',
+                          ),
+                          Positioned(
+                            bottom: 5,
+                            left: 5,
+                            child: Row(
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.play,
+                                  color: Colors.white,
+                                  size: Sizes.size16,
+                                ),
+                                Gaps.h4,
+                                Text(
+                                  '4.1M',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
