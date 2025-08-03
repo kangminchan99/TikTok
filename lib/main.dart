@@ -3,7 +3,7 @@ import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
-import 'package:tiktok/features/videos/inbox/activity_screen.dart';
+import 'package:tiktok/features/inbox/activity_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
