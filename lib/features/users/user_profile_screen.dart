@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/features/settings/settings_screen.dart';
 import 'package:tiktok/features/users/widgets/persistent_tab_bar.dart';
 import 'package:tiktok/features/users/widgets/user_account.dart';
 import 'package:tiktok/features/users/widgets/user_icon_button.dart';
@@ -14,6 +15,13 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  void _onGearPressed() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // 앱바 사라지게 하려면 CustomScrollView + SliverAppBar 사용
@@ -27,7 +35,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 title: Text('Minchan'),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _onGearPressed,
                     icon: Icon(FontAwesomeIcons.gear, size: Sizes.size20),
                   ),
                 ],
