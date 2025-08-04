@@ -24,7 +24,10 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      // 사용자 로컬 설정에 맞게 dark/light 모드 적용
+      themeMode: ThemeMode.system,
       theme: ThemeData(
+        brightness: Brightness.light,
         // 기본 배경색 전역 설정
         scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: TextSelectionThemeData(
@@ -49,8 +52,16 @@ class TikTokApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey.shade50),
       ),
-      home: MainNavigationScreen(),
+      // 다크모드 설정
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey.shade800),
+        primaryColor: Color(0xFFE9435A),
+      ),
+      home: SignUpScreen(),
     );
   }
 }
