@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
@@ -27,6 +28,7 @@ class TikTokApp extends StatelessWidget {
       // 사용자 로컬 설정에 맞게 dark/light 모드 적용
       themeMode: ThemeMode.system,
       theme: ThemeData(
+        textTheme: Typography.blackMountainView,
         brightness: Brightness.light,
         // 기본 배경색 전역 설정
         scaffoldBackgroundColor: Colors.white,
@@ -56,9 +58,11 @@ class TikTokApp extends StatelessWidget {
       ),
       // 다크모드 설정
       darkTheme: ThemeData(
+        textTheme: Typography.whiteMountainView,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
-        bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey.shade800),
+        bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey.shade900),
+        appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade900),
         primaryColor: Color(0xFFE9435A),
       ),
       home: SignUpScreen(),

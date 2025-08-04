@@ -85,7 +85,6 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         height: 300,
-        color: Colors.white,
         child: CupertinoDatePicker(
           mode: CupertinoDatePickerMode.date,
           // 생일을 미래로 설정하지 못하게 맥시멈 설정

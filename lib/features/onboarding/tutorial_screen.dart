@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok/utils.dart';
 
 // state에 저장하기 위해 enum생성
 enum Direction { left, right }
@@ -110,7 +111,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
+          color: isDarkMode(context) ? Colors.black : Colors.white,
           child: AnimatedOpacity(
             duration: Duration(milliseconds: 300),
             opacity: _showingPage == Page.first ? 0 : 1,

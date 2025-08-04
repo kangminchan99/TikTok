@@ -25,7 +25,6 @@ class InboxScreen extends StatelessWidget {
       backgroundColor: Colors.white,
 
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 1,
         title: Text('Inbox'),
         actions: [

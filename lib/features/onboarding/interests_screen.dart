@@ -143,7 +143,6 @@ class _InterestsScreenState extends State<InterestsScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 1,
-        color: Colors.white,
         child: GestureDetector(
           onTap: _onNextTap,
           child: Container(
