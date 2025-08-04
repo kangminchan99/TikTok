@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
 import 'package:tiktok/features/inbox/activity_screen.dart';
 
-void main() {
+void main() async {
+  // flutter engine과 framework를 묶는 접착제
+  WidgetsFlutterBinding.ensureInitialized();
+  // 앱이 시작될 때 세로 모드로 고정
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(const TikTokApp());
 }
 
