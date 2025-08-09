@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
@@ -7,6 +8,8 @@ import 'package:tiktok/features/discover/discover_screen.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
 import 'package:tiktok/features/inbox/activity_screen.dart';
+import 'package:tiktok/features/settings/settings_screen.dart';
+import 'package:tiktok/intl/intl_generated.dart';
 
 void main() async {
   // flutter engine과 framework를 묶는 접착제
@@ -25,6 +28,19 @@ class TikTokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      // 일종의 번역 파일들을 불러옴
+      localizationsDelegates: [
+        // 플러터 기본 위젯들을 위한 번역본
+        AppLocalizations.delegate,
+        // flutter에는 텍스트가 기본적으로 들어가있는 위젯들이 있는데 ex) licenses는 코드로
+        // 작성하지 않아도 텍스트와 함께 보여주는 것들을 말함, 그런 것들을 플러터에서 이미 번역을 해놨는데
+        // 아래 3개의 delegate가 그것을 불러오는 것임
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      // 앱이 지원하는 언어 명시
+      supportedLocales: [Locale('en'), Locale('ko'), Locale('es')],
       debugShowCheckedModeBanner: false,
       // 사용자 로컬 설정에 맞게 dark/light 모드 적용
       themeMode: ThemeMode.system,

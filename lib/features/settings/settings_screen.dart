@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,6 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Localizations.override 위젯을 사용하여 앱의 로케일을 강제로 설정할 수 있다
     return Scaffold(
       appBar: AppBar(title: Text('Settings')),
       body: ListView(
@@ -47,14 +49,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 initialDate: DateTime.now(),
                 lastDate: DateTime(2030),
               );
-              print(date);
+              if (kDebugMode) {
+                print(date);
+              }
 
               if (context.mounted) {
                 final time = await showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.now(),
                 );
-                print(time);
+                if (kDebugMode) {
+                  print(time);
+                }
               }
 
               if (context.mounted) {
@@ -63,7 +69,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   firstDate: DateTime(1980),
                   lastDate: DateTime(2030),
                 );
-                print(booking);
+
+                if (kDebugMode) {
+                  print(booking);
+                }
               }
             },
             title: Text('what is your birthday?'),
