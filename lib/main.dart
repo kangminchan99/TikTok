@@ -29,6 +29,7 @@ class TikTokApp extends StatelessWidget {
       // 사용자 로컬 설정에 맞게 dark/light 모드 적용
       themeMode: ThemeMode.system,
       theme: ThemeData(
+        useMaterial3: true,
         textTheme: Typography.blackMountainView,
         brightness: Brightness.light,
         // 기본 배경색 전역 설정
@@ -66,6 +67,7 @@ class TikTokApp extends StatelessWidget {
 
       // 다크모드 설정
       darkTheme: ThemeData(
+        useMaterial3: true,
         tabBarTheme: TabBarThemeData(
           indicatorColor: Colors.white,
           labelColor: Colors.white,
@@ -78,10 +80,20 @@ class TikTokApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
         bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey.shade900),
-        appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade900),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey.shade900,
+          surfaceTintColor: Colors.grey.shade900,
+          titleTextStyle: TextStyle(
+            fontSize: Sizes.size16 + Sizes.size2,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+          actionsIconTheme: IconThemeData(color: Colors.grey.shade100),
+        ),
+        iconTheme: IconThemeData(color: Colors.grey.shade100),
         primaryColor: Color(0xFFE9435A),
       ),
-      home: MainNavigationScreen(),
+      home: SignUpScreen(),
     );
   }
 }

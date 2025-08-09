@@ -110,17 +110,25 @@ class _TutorialScreenState extends State<TutorialScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: Container(
           color: isDarkMode(context) ? Colors.black : Colors.white,
-          child: AnimatedOpacity(
-            duration: Duration(milliseconds: 300),
-            opacity: _showingPage == Page.first ? 0 : 1,
-            child: CupertinoButton(
-              color: Theme.of(context).primaryColor,
-              onPressed: _onEnterAppTap,
-              child: Text(
-                'Enter the app!',
-                style: TextStyle(color: Colors.white),
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: Sizes.size32,
+              bottom: Sizes.size64,
+              left: Sizes.size24,
+              right: Sizes.size24,
+            ),
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 300),
+              opacity: _showingPage == Page.first ? 0 : 1,
+              child: CupertinoButton(
+                color: Theme.of(context).primaryColor,
+                onPressed: _onEnterAppTap,
+                child: Text(
+                  'Enter the app!',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
