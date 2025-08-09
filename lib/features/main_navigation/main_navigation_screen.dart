@@ -8,6 +8,7 @@ import 'package:tiktok/features/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktok/features/users/user_profile_screen.dart';
 import 'package:tiktok/features/inbox/inbox_screen.dart';
 import 'package:tiktok/features/videos/video_timeline_screen.dart';
+import 'package:tiktok/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -51,9 +52,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
+      backgroundColor: _selectedIndex == 0 || isDark
+          ? Colors.black
+          : Colors.white,
       // body: screens.elementAt(_selectedIndex),
       body: Stack(
         children: [
@@ -64,7 +68,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: _selectedIndex == 0 ? Colors.black : Colors.white,
+        color: _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -87,7 +91,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             Gaps.h24,
             GestureDetector(
               onTap: _onPostVideoButtonTap,
-
               child: PostVideoButton(inverted: _selectedIndex != 0),
             ),
             Gaps.h24,

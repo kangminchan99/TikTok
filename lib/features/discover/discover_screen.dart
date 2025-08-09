@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/constants/breakpoints.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/utils.dart';
 
 final tabs = ['Top', 'Users', 'Videos', 'Sounds', 'LIVE', 'Shopping', 'Brands'];
 
@@ -50,21 +51,20 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               controller: _textEditingController,
               onChanged: _onSearchChanged,
               onSubmitted: _onSearchSubmitted,
+              style: TextStyle(
+                color: isDarkMode(context) ? Colors.white : Colors.black,
+              ),
             ),
           ),
           bottom: TabBar(
             padding: EdgeInsets.symmetric(horizontal: Sizes.size16),
             splashFactory: NoSplash.splashFactory,
             isScrollable: true,
-            labelColor: Colors.black,
             labelStyle: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: Sizes.size16,
             ),
-            unselectedLabelColor: Colors.grey.shade500,
-            indicatorColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.tab,
-
             tabAlignment: kIsWeb ? TabAlignment.center : TabAlignment.start,
             tabs: [for (var tab in tabs) Tab(text: tab)],
           ),
@@ -107,7 +107,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     ),
                     Gaps.v10,
                     Text(
-                      '${constraints.maxWidth}This is a very long caption for my tiktok that im upload jusy now currently',
+                      'This is a very long caption for my tiktok that im upload jusy now currently',
                       style: TextStyle(
                         fontSize: Sizes.size16 + Sizes.size2,
                         fontWeight: FontWeight.bold,
@@ -116,40 +116,42 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gaps.v8,
-                    if (constraints.maxHeight < 200 ||
-                        constraints.maxWidth > 250)
-                      DefaultTextStyle(
-                        style: TextStyle(
-                          fontSize: Sizes.size12,
-                          color: Colors.grey.shade600,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                'https://avatars.githubusercontent.com/u/114412280?v=4',
-                              ),
-                              radius: 12,
-                            ),
-                            Gaps.h4,
-                            Expanded(
-                              child: Text(
-                                'My Avatar is going to be very long',
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.heart,
-                              size: Sizes.size16,
-                              color: Colors.grey.shade600,
-                            ),
-                            Gaps.h2,
-                            Text('2.9M'),
-                          ],
-                        ),
+                    // if (constraints.maxHeight < 200 ||
+                    //     constraints.maxWidth > 250)
+                    DefaultTextStyle(
+                      style: TextStyle(
+                        fontSize: Sizes.size12,
+                        color: isDarkMode(context)
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade600,
+                        fontWeight: FontWeight.w600,
                       ),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              'https://avatars.githubusercontent.com/u/114412280?v=4',
+                            ),
+                            radius: 12,
+                          ),
+                          Gaps.h4,
+                          Expanded(
+                            child: Text(
+                              'My Avatar is going to be very long',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                          FaIcon(
+                            FontAwesomeIcons.heart,
+                            size: Sizes.size16,
+                            color: Colors.grey.shade600,
+                          ),
+                          Gaps.h2,
+                          Text('2.9M'),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

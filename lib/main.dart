@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
+import 'package:tiktok/features/discover/discover_screen.dart';
 import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
 import 'package:tiktok/features/inbox/activity_screen.dart';
@@ -54,10 +55,25 @@ class TikTokApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        tabBarTheme: TabBarThemeData(
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey.shade500,
+          indicatorColor: Colors.black,
+        ),
+        listTileTheme: ListTileThemeData(iconColor: Colors.black),
         bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey.shade50),
       ),
+
       // 다크모드 설정
       darkTheme: ThemeData(
+        tabBarTheme: TabBarThemeData(
+          indicatorColor: Colors.white,
+          labelColor: Colors.white,
+        ),
+        textSelectionTheme: TextSelectionThemeData(
+          // 커서 색 설정
+          cursorColor: Color(0xFFE9435A),
+        ),
         textTheme: Typography.whiteMountainView,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
@@ -65,7 +81,7 @@ class TikTokApp extends StatelessWidget {
         appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade900),
         primaryColor: Color(0xFFE9435A),
       ),
-      home: SignUpScreen(),
+      home: MainNavigationScreen(),
     );
   }
 }
