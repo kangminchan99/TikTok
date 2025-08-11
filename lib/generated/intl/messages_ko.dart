@@ -24,16 +24,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "alreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
-      "Already have an account?",
-    ),
-    "appleButton": MessageLookupByLibrary.simpleMessage("Continue with Apple"),
+    "alreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage("이미 계정이 있나요?"),
+    "appleButton": MessageLookupByLibrary.simpleMessage("Apple로 계속하기"),
     "emailPasswordButton": MessageLookupByLibrary.simpleMessage(
-      "Use email & password",
+      "이메일 & 비밀번호 사용",
     ),
-    "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
+    "logIn": MessageLookupByLibrary.simpleMessage("로그인"),
     "signUpSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Create a profile, follow other accounts, make your own videos, and more.",
+      "프로필을 만들고, 다른 계정을 팔로우하고, 자신의 동영상을 만들고, 그 이상을 해보세요.",
     ),
     "signUpTitle": m1,
   };
