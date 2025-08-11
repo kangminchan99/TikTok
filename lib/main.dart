@@ -26,6 +26,7 @@ class TikTokApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    S.load(Locale('en'));
     return MaterialApp(
       title: 'Flutter Demo',
       // 일종의 번역 파일들을 불러옴
