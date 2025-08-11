@@ -29,18 +29,19 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       // 일종의 번역 파일들을 불러옴
-      localizationsDelegates: [
-        // 플러터 기본 위젯들을 위한 번역본
-        AppLocalizations.delegate,
-        // flutter에는 텍스트가 기본적으로 들어가있는 위젯들이 있는데 ex) licenses는 코드로
-        // 작성하지 않아도 텍스트와 함께 보여주는 것들을 말함, 그런 것들을 플러터에서 이미 번역을 해놨는데
-        // 아래 3개의 delegate가 그것을 불러오는 것임
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
+      // localizationsDelegates: [
+      //   // 플러터 기본 위젯들을 위한 번역본
+      //   AppLocalizations.delegate,
+      //   // flutter에는 텍스트가 기본적으로 들어가있는 위젯들이 있는데 ex) licenses는 코드로
+      //   // 작성하지 않아도 텍스트와 함께 보여주는 것들을 말함, 그런 것들을 플러터에서 이미 번역을 해놨는데
+      //   // 아래 3개의 delegate가 그것을 불러오는 것임
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      // ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       // 앱이 지원하는 언어 명시
-      supportedLocales: [Locale('en'), Locale('ko'), Locale('es')],
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       // 사용자 로컬 설정에 맞게 dark/light 모드 적용
       themeMode: ThemeMode.system,
