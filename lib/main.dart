@@ -26,7 +26,8 @@ class TikTokApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    S.load(Locale('en'));
+    // 영어로 강제 설정
+    // S.load(Locale('en'));
     return MaterialApp(
       title: 'Flutter Demo',
       // 일종의 번역 파일들을 불러옴
@@ -113,7 +114,7 @@ class TikTokApp extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.grey.shade100),
         primaryColor: Color(0xFFE9435A),
       ),
-      home: SignUpScreen(),
+      home: MainNavigationScreen(),
     );
   }
 }

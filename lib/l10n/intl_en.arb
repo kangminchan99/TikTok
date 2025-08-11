@@ -23,5 +23,35 @@
   "emailPasswordButton": "Use email & password",
   "appleButton": "Continue with Apple",
   "alreadyHaveAnAccount": "Already have an account?",
-  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}"
+  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}",
+  "likeCount": "{likeCount}",
+  "@likeCount": {
+    "description": "The number of likes on a video.",
+    "placeholders": {
+      "likeCount": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentCount": "{commentCount}",
+  "@commentCount": {
+    "description": "The number of comments on a video.",
+    "placeholders": {
+      "commentCount": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentTitle": "{value} {value2, plural, =0{comments} =1{comment} other{comments}}",
+  "@commentTitle": {
+    "description": "The title for the comments section.",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  }
 }

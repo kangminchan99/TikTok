@@ -123,6 +123,53 @@ class S {
       args: [gender],
     );
   }
+
+  /// `{likeCount}`
+  String likeCount(int likeCount) {
+    final NumberFormat likeCountNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String likeCountString = likeCountNumberFormat.format(likeCount);
+
+    return Intl.message(
+      '$likeCountString',
+      name: 'likeCount',
+      desc: 'The number of likes on a video.',
+      args: [likeCountString],
+    );
+  }
+
+  /// `{commentCount}`
+  String commentCount(int commentCount) {
+    final NumberFormat commentCountNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String commentCountString = commentCountNumberFormat.format(
+      commentCount,
+    );
+
+    return Intl.message(
+      '$commentCountString',
+      name: 'commentCount',
+      desc: 'The number of comments on a video.',
+      args: [commentCountString],
+    );
+  }
+
+  /// `{value} {value2, plural, =0{comments} =1{comment} other{comments}}`
+  String commentTitle(int value, num value2) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString ${Intl.plural(value2, zero: 'comments', one: 'comment', other: 'comments')}',
+      name: 'commentTitle',
+      desc: 'The title for the comments section.',
+      args: [valueString, value2],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
