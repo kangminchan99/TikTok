@@ -9,19 +9,48 @@ import 'package:tiktok/generated/l10n.dart';
 import 'package:tiktok/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static String routeName = '/';
   const SignUpScreen({super.key});
 
   // 네비게이션을 다루는 로직과 메서드를 UI에서 분리하기 위해 따로 사용
   void _onLoginTap(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+    //  Navigator.of(
+    //   context,
+    // ).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.of(context).pushNamed(LoginScreen.routeName);
   }
 
   void _onEmailTap(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => UsernameScreen()));
+    // Navigator.of(
+    //   context,
+    // ).push(MaterialPageRoute(builder: (context) => UsernameScreen()));
+
+    // Navigator.of(context).push(
+    //   PageRouteBuilder(
+    //     transitionDuration: Duration(seconds: 3),
+    //     reverseTransitionDuration: Duration(seconds: 3),
+    //     pageBuilder: (context, animation, secondaryAnimation) =>
+    //         UsernameScreen(),
+
+    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //       final offsetAnimation = Tween<Offset>(
+    //         begin: Offset(0, 1),
+    //         end: Offset.zero,
+    //       ).animate(animation);
+
+    //       final opacityAnimation = Tween<double>(
+    //         begin: 0.5,
+    //         end: 1.0,
+    //       ).animate(animation);
+    //       return SlideTransition(
+    //         position: offsetAnimation,
+    //         child: FadeTransition(opacity: opacityAnimation, child: child),
+    //       );
+    //     },
+    //   ),
+    // );
+
+    Navigator.of(context).pushNamed(UsernameScreen.routeName);
   }
 
   @override
