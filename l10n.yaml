@@ -1,6 +1,0 @@
-# 번역 파일의 저장 위치 명시 (번역 파일의 확장자는 .arb)
-arb-dir: lib/intl
-# 앱의 기본 언어가 들어있는 파일이 무엇인지 알려주기
-template-arb-file: intl_en.arb
-# 번역본 파일이 어떤 곳에 생성되어야 하는지
-output-localization-file: intl_generated.dart
