@@ -114,7 +114,7 @@ class TikTokApp extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.grey.shade100),
         primaryColor: Color(0xFFE9435A),
       ),
-      home: MainNavigationScreen(),
+      home: SignUpScreen(),
     );
   }
 }
