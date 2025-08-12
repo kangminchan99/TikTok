@@ -13,6 +13,7 @@ import 'package:tiktok/features/onboarding/interests_screen.dart';
 import 'package:tiktok/features/inbox/activity_screen.dart';
 import 'package:tiktok/features/settings/settings_screen.dart';
 import 'package:tiktok/generated/l10n.dart';
+import 'package:tiktok/router.dart';
 
 void main() async {
   // flutter engine과 framework를 묶는 접착제
@@ -31,7 +32,8 @@ class TikTokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // 영어로 강제 설정
     // S.load(Locale('en'));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       // 일종의 번역 파일들을 불러옴
       localizationsDelegates: [
@@ -117,14 +119,7 @@ class TikTokApp extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.grey.shade100),
         primaryColor: Color(0xFFE9435A),
       ),
-      initialRoute: SignUpScreen.routeName,
       // home: SignUpScreen(),
-      routes: {
-        SignUpScreen.routeName: (context) => SignUpScreen(),
-        UsernameScreen.routeName: (context) => UsernameScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
-        EmailScreen.routeName: (context) => EmailScreen(),
-      },
     );
   }
 }

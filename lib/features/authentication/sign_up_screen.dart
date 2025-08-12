@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/login_screen.dart';
@@ -9,7 +10,8 @@ import 'package:tiktok/generated/l10n.dart';
 import 'package:tiktok/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static String routeName = '/';
+  static const routeURL = '/';
+  static const routeName = "signUp";
   const SignUpScreen({super.key});
 
   // 네비게이션을 다루는 로직과 메서드를 UI에서 분리하기 위해 따로 사용
@@ -17,7 +19,8 @@ class SignUpScreen extends StatelessWidget {
     //  Navigator.of(
     //   context,
     // ).push(MaterialPageRoute(builder: (context) => LoginScreen()));
-    Navigator.of(context).pushNamed(LoginScreen.routeName);
+    // Navigator.of(context).pushNamed(LoginScreen.routeName);
+    context.push(LoginScreen.routeName);
   }
 
   void _onEmailTap(BuildContext context) {
@@ -50,18 +53,19 @@ class SignUpScreen extends StatelessWidget {
     //   ),
     // );
 
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    // Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    context.pushNamed(UsernameScreen.routeName);
   }
 
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        if (orientation == Orientation.landscape) {
-          return Scaffold(
-            body: Center(child: Text('Please use the app in portrait mode.')),
-          );
-        }
+        // if (orientation == Orientation.landscape) {
+        //   return Scaffold(
+        //     body: Center(child: Text('Please use the app in portrait mode.')),
+        //   );
+        // }
         return Scaffold(
           body: SafeArea(
             child: Padding(

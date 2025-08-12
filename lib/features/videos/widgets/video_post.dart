@@ -202,7 +202,7 @@ class _VideoPostState extends State<VideoPost>
                 Gaps.v24,
                 VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: S.of(context).likeCount(9819211231212333),
+                  text: S.of(context).likeCount(98192112312),
                 ),
                 Gaps.v24,
                 GestureDetector(
