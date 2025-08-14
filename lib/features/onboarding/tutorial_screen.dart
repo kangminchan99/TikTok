@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
-import 'package:tiktok/common/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/utils.dart';
 
 // state에 저장하기 위해 enum생성
