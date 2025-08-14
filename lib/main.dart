@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/authentication/email_screen.dart';
@@ -8,7 +9,7 @@ import 'package:tiktok/features/authentication/login_screen.dart';
 import 'package:tiktok/features/authentication/sign_up_screen.dart';
 import 'package:tiktok/features/authentication/username_screen.dart';
 import 'package:tiktok/features/discover/discover_screen.dart';
-import 'package:tiktok/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok/common/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
 import 'package:tiktok/features/inbox/activity_screen.dart';
 import 'package:tiktok/features/settings/settings_screen.dart';
@@ -18,6 +19,8 @@ import 'package:tiktok/router.dart';
 void main() async {
   // flutter engine과 framework를 묶는 접착제
   WidgetsFlutterBinding.ensureInitialized();
+  // GoRouter push로 웹 URL 변경 가능 설정
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   // 앱이 시작될 때 세로 모드로 고정
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

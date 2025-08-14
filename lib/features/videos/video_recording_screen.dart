@@ -12,6 +12,8 @@ import 'package:tiktok/features/videos/video_preview_screen.dart';
 import 'package:tiktok/features/videos/widgets/flash_mode_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
+  static const String routeName = 'postVideo';
+  static const String routeURL = '/upload';
   const VideoRecordingScreen({super.key});
 
   @override
@@ -268,6 +270,13 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                   // 카메라 프리뷰
                   if (!_noCamera && _isCamReady)
                     CameraPreview(_cameraController!),
+
+                  Positioned(
+                    top: Sizes.size40,
+                    left: Sizes.size20,
+
+                    child: CloseButton(color: Colors.white),
+                  ),
 
                   // 플래시/셀피 스위치
                   if (!_noCamera)

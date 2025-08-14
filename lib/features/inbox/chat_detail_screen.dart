@@ -4,7 +4,11 @@ import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 
 class ChatDetailScreen extends StatefulWidget {
-  const ChatDetailScreen({super.key});
+  static const String routeName = 'chatDetail';
+  // 자식 경로는 /로 시작할 수 없음
+  static const String routeURL = ':chatId';
+  final String chatId;
+  const ChatDetailScreen({super.key, required this.chatId});
 
   @override
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
@@ -43,7 +47,10 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               ),
             ],
           ),
-          title: Text('민찬', style: TextStyle(fontWeight: FontWeight.w600)),
+          title: Text(
+            '민찬 ${widget.chatId}',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
           subtitle: Text('Active now'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,

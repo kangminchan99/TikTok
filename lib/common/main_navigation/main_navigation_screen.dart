@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok/constants/gaps.dart';
-import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/discover/discover_screen.dart';
-import 'package:tiktok/features/main_navigation/widgets/nav_tab.dart';
-import 'package:tiktok/features/main_navigation/widgets/post_video_button.dart';
+import 'package:tiktok/common/main_navigation/widgets/nav_tab.dart';
+import 'package:tiktok/common/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktok/features/users/user_profile_screen.dart';
 import 'package:tiktok/features/inbox/inbox_screen.dart';
+import 'package:tiktok/features/videos/video_recording_screen.dart';
 import 'package:tiktok/features/videos/video_timeline_screen.dart';
 import 'package:tiktok/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  static const String routeName = 'mainNavigation';
+  final String tab;
+  const MainNavigationScreen({required this.tab, super.key});
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 1;
+  final List<String> _tabs = ['home', 'discover', "xxxx", 'inbox', 'profile'];
+  late int _selectedIndex = _tabs.indexOf(widget.tab);
 
   // final screens = [
   //   StfScreen(key: GlobalKey()),
@@ -33,21 +37,24 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   //   // Center(child: Text('Profile')),
   // ];
 
+  // web에서 url 변경 시 바로 반영
+  @override
+  void didUpdateWidget(covariant MainNavigationScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.tab != widget.tab) {
+      final next = _tabs.indexOf(widget.tab);
+      setState(() {
+        _selectedIndex = next < 0 ? 0 : next; // 안전 가드
+      });
+    }
+  }
+
   void _onTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    context.go('/${_tabs[index]}');
   }
 
   void _onPostVideoButtonTap() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) =>
-            Scaffold(appBar: AppBar(title: Text('Record Video'))),
-        // 전체화면으로 설정
-        fullscreenDialog: true,
-      ),
-    );
+    context.pushNamed(VideoRecordingScreen.routeName);
   }
 
   @override
