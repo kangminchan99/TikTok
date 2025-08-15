@@ -12,6 +12,7 @@ class NavTab extends StatelessWidget {
     required this.onTap,
     required this.selectedIcon,
     required this.selectedIndex,
+    required this.isDark,
   });
 
   final String text;
@@ -20,10 +21,10 @@ class NavTab extends StatelessWidget {
   final IconData selectedIcon;
   final Function onTap;
   final int selectedIndex;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
     return Expanded(
       child: GestureDetector(
         onTap: () => onTap(),

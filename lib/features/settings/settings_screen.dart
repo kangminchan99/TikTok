@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
+import 'package:tiktok/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -29,6 +30,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: Text('Settings')),
       body: ListView(
         children: [
+          ValueListenableBuilder(
+            valueListenable: darkModeConfig,
+            builder: (context, value, child) => SwitchListTile.adaptive(
+              value: darkModeConfig.value,
+              onChanged: (value) {
+                darkModeConfig.value = !darkModeConfig.value;
+              },
+              title: Text('Dark Mode'),
+              subtitle: Text('setting dark mode?'),
+            ),
+          ),
+          // InheritedWidget
           // SwitchListTile.adaptive(
           //   value: VideoConfigData.of(context).autoMute,
           //   onChanged: (value) {
@@ -37,13 +50,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
           //   title: Text('Auto Mute'),
           //   subtitle: Text('Videos will be muted by default.'),
           // ),
+          // ChangeNotifier
+          // AnimatedBuilder(
+          //   animation: videoConfig,
+          //   builder: (context, child) => SwitchListTile.adaptive(
+          //     value: videoConfig.autoMuted,
+          //     onChanged: (value) {
+          //       videoConfig.toggleAutoMute();
+          //     },
+          //     title: Text('Auto Mute'),
+          //     subtitle: Text('Videos will be muted by default.'),
+          //   ),
+          // ),
+          AnimatedBuilder(
+            animation: videoConfig,
+            builder: (context, child) => SwitchListTile.adaptive(
+              value: videoConfig.value,
+              onChanged: (value) {
+                videoConfig.value = !videoConfig.value;
+              },
+              title: Text('Auto Mute'),
+              subtitle: Text('Videos will be muted by default.'),
+            ),
+          ),
           SwitchListTile.adaptive(
             value: value,
             onChanged: _onSwitchChanged,
             title: Text('Enable Notifications'),
             subtitle: Text('They will be cute.'),
           ),
-
           CheckboxListTile.adaptive(
             value: value,
             onChanged: _onSwitchChanged,

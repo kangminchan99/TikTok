@@ -1,6 +1,26 @@
-// import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+
+// ChangeNotifier
+
+// class VideoConfig extends ChangeNotifier {
+//   bool autoMuted = true;
+
+//   void toggleAutoMute() {
+//     autoMuted = !autoMuted;
+//     notifyListeners();
+//   }
+// }
+
+// final videoConfig = VideoConfig();
+
+final videoConfig = ValueNotifier<bool>(false);
+
+final darkModeConfig = ValueNotifier<bool>(false);
 
 // // InheritedWidget
+
+// import 'package:flutter/widgets.dart';
+
 // class VideoConfigData extends InheritedWidget {
 //   final bool autoMute;
 //   final void Function() toggleMuted;

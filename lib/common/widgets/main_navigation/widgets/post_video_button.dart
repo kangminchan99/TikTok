@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/constants/sizes.dart';
-import 'package:tiktok/utils.dart';
 
 class PostVideoButton extends StatelessWidget {
-  const PostVideoButton({super.key, required this.inverted});
+  const PostVideoButton({
+    super.key,
+    required this.inverted,
+    required this.isDark,
+  });
 
   final bool inverted;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
     return Stack(
       clipBehavior: Clip.none,
       children: [
