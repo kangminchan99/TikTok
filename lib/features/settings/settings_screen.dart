@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
+import 'package:tiktok/features/videos/models/playback_config_model.dart';
+import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -74,11 +76,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
           //     subtitle: Text('Videos will be muted by default.'),
           //   ),
           // ),
+          // SwitchListTile.adaptive(
+          //   value: context.watch<VideoConfig>().isMuted,
+          //   onChanged: (value) => context.read<VideoConfig>().toggleMute(),
+          //   title: Text('Auto Mute'),
+          //   subtitle: Text('videos muted by default'),
+          // ),
           SwitchListTile.adaptive(
-            value: context.watch<VideoConfig>().isMuted,
-            onChanged: (value) => context.read<VideoConfig>().toggleMute(),
-            title: Text('Auto Mute'),
-            subtitle: Text('videos muted by default'),
+            value: context.watch<PlaybackConfigViewModel>().muted,
+            onChanged: (value) =>
+                context.read<PlaybackConfigViewModel>().setMuted(value),
+            title: Text('Mute video'),
+            subtitle: Text('video will be muted.'),
+          ),
+          SwitchListTile.adaptive(
+            value: context.watch<PlaybackConfigViewModel>().autoPlay,
+            onChanged: (value) =>
+                context.read<PlaybackConfigViewModel>().setAutoPlay(value),
+            title: Text('AutoPlay'),
+            subtitle: Text('video will start playing automatically'),
           ),
           SwitchListTile.adaptive(
             value: value,

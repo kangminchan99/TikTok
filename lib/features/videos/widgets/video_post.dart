@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok/features/videos/widgets/video_button.dart';
 import 'package:tiktok/features/videos/widgets/video_comments.dart';
 import 'package:tiktok/generated/l10n.dart';
@@ -30,6 +31,8 @@ class _VideoPostState extends State<VideoPost>
 
   bool _isPaused = false;
 
+  bool _localMuted = false;
+
   // ChangeNotifier
   // bool _autoMute = videoConfig.autoMuted;
   // ValueNotifier
@@ -51,6 +54,10 @@ class _VideoPostState extends State<VideoPost>
       duration: _animataionDuration,
     );
 
+    context.read<PlaybackConfigViewModel>().addListener(
+      _onPlaybackConfigChanged,
+    );
+
     // videoConfig.addListener(() {
     //   setState(() {
     //     // ChangeNotifier
@@ -62,6 +69,16 @@ class _VideoPostState extends State<VideoPost>
     // _animationController.addListener(() {
     //   setState(() {});
     // });
+  }
+
+  void _onPlaybackConfigChanged() {
+    if (!mounted) return;
+    final muted = context.read<PlaybackConfigViewModel>().muted;
+    if (muted) {
+      _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(1);
+    }
   }
 
   void _onVideoChange() {
@@ -99,7 +116,11 @@ class _VideoPostState extends State<VideoPost>
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
-      _videoPlayerController.play();
+      final autoPlay = context.read<PlaybackConfigViewModel>().autoPlay;
+
+      if (autoPlay) {
+        _videoPlayerController.play();
+      }
     }
 
     if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
@@ -190,10 +211,14 @@ class _VideoPostState extends State<VideoPost>
               //   videoConfig.value = !videoConfig.value;
               // },
               onPressed: () {
-                context.read<VideoConfig>().toggleMute();
+                // context.read<VideoConfig>().toggleMute();
+                context.read<PlaybackConfigViewModel>().setMuted(
+                  !context.read<PlaybackConfigViewModel>().muted,
+                );
               },
               icon: FaIcon(
-                context.watch<VideoConfig>().isMuted
+                // context.watch<VideoConfig>().isMuted
+                context.watch<PlaybackConfigViewModel>().muted
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
