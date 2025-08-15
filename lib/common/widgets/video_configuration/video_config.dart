@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 
 // ChangeNotifier
+class VideoConfig extends ChangeNotifier {
+  // bool autoMuted = true;
+  bool isMuted = false;
+  bool isAutoPlay = false;
 
-// class VideoConfig extends ChangeNotifier {
-//   bool autoMuted = true;
+  // void toggleAutoMute() {
+  //   autoMuted = !autoMuted;
+  //   notifyListeners();
+  // }
 
-//   void toggleAutoMute() {
-//     autoMuted = !autoMuted;
-//     notifyListeners();
-//   }
-// }
+  void toggleMute() {
+    isMuted = !isMuted;
+    notifyListeners();
+  }
+
+  void toggleAutoPlay() {
+    isAutoPlay = !isAutoPlay;
+    notifyListeners();
+  }
+}
 
 // final videoConfig = VideoConfig();
 
-final videoConfig = ValueNotifier<bool>(false);
+// ValueNotifier
+// final videoConfig = ValueNotifier<bool>(false);
 
 final darkModeConfig = ValueNotifier<bool>(false);
 

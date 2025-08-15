@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
@@ -32,7 +33,7 @@ class _VideoPostState extends State<VideoPost>
   // ChangeNotifier
   // bool _autoMute = videoConfig.autoMuted;
   // ValueNotifier
-  bool _autoMute = videoConfig.value;
+  // bool _autoMute = videoConfig.value;
 
   final Duration _animataionDuration = Duration(milliseconds: 300);
 
@@ -50,14 +51,14 @@ class _VideoPostState extends State<VideoPost>
       duration: _animataionDuration,
     );
 
-    videoConfig.addListener(() {
-      setState(() {
-        // ChangeNotifier
-        // _autoMute = videoConfig.autoMuted;
-        // ValueNotifier
-        _autoMute = videoConfig.value;
-      });
-    });
+    // videoConfig.addListener(() {
+    //   setState(() {
+    //     // ChangeNotifier
+    //     // _autoMute = videoConfig.autoMuted;
+    //     // ValueNotifier
+    //     _autoMute = videoConfig.value;
+    //   });
+    // });
     // _animationController.addListener(() {
     //   setState(() {});
     // });
@@ -185,11 +186,14 @@ class _VideoPostState extends State<VideoPost>
               // ChangeNotifier
               // onPressed: videoConfig.toggleAutoMute,
               // ValueNotifier
+              // onPressed: () {
+              //   videoConfig.value = !videoConfig.value;
+              // },
               onPressed: () {
-                videoConfig.value = !videoConfig.value;
+                context.read<VideoConfig>().toggleMute();
               },
               icon: FaIcon(
-                _autoMute
+                context.watch<VideoConfig>().isMuted
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
 import 'package:tiktok/utils.dart';
 
@@ -62,16 +63,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           //     subtitle: Text('Videos will be muted by default.'),
           //   ),
           // ),
-          AnimatedBuilder(
-            animation: videoConfig,
-            builder: (context, child) => SwitchListTile.adaptive(
-              value: videoConfig.value,
-              onChanged: (value) {
-                videoConfig.value = !videoConfig.value;
-              },
-              title: Text('Auto Mute'),
-              subtitle: Text('Videos will be muted by default.'),
-            ),
+          // AnimatedBuilder(
+          //   animation: videoConfig,
+          //   builder: (context, child) => SwitchListTile.adaptive(
+          //     value: videoConfig.value,
+          //     onChanged: (value) {
+          //       videoConfig.value = !videoConfig.value;
+          //     },
+          //     title: Text('Auto Mute'),
+          //     subtitle: Text('Videos will be muted by default.'),
+          //   ),
+          // ),
+          SwitchListTile.adaptive(
+            value: context.watch<VideoConfig>().isMuted,
+            onChanged: (value) => context.read<VideoConfig>().toggleMute(),
+            title: Text('Auto Mute'),
+            subtitle: Text('videos muted by default'),
           ),
           SwitchListTile.adaptive(
             value: value,
