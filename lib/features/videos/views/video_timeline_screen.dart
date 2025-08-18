@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok/features/videos/widgets/video_post.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tiktok/features/videos/view_models/timeline_view_model.dart';
+import 'package:tiktok/features/videos/views/widgets/video_post.dart';
 
-class VideoTimelineScreen extends StatefulWidget {
+class VideoTimelineScreen extends ConsumerStatefulWidget {
   const VideoTimelineScreen({super.key});
 
   @override
-  State<VideoTimelineScreen> createState() => _VideoTimelineScreenState();
+  VideoTimelineScreenState createState() => VideoTimelineScreenState();
 }
 
-class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
+class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   int _itemCount = 4;
 
   final PageController _pageController = PageController();
@@ -46,23 +48,31 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: _onRefresh,
-      // refresh Icon 돌아가는 위치
-      displacement: 50,
-      // refreshIndicator가 화면에 나타날 때 시작점
-      edgeOffset: 20,
-      backgroundColor: Colors.black,
-      color: Theme.of(context).primaryColor,
-      child: PageView.builder(
-        controller: _pageController,
-        scrollDirection: Axis.vertical,
-        itemCount: _itemCount,
-        // onPageChanged - 현재 페이지 인덱스 위치를 알 수 있다.
-        onPageChanged: _onPageChanged,
-        itemBuilder: (context, index) =>
-            VideoPost(onVideoFinished: _onVideoFinished, index: index),
-      ),
-    );
+    return ref
+        .watch(timelineProvider)
+        .when(
+          error: (error, stackTrace) => Center(
+            child: Text('Error: $error', style: TextStyle(color: Colors.white)),
+          ),
+          loading: () => Center(child: CircularProgressIndicator()),
+          data: (videos) => RefreshIndicator(
+            onRefresh: _onRefresh,
+            // refresh Icon 돌아가는 위치
+            displacement: 50,
+            // refreshIndicator가 화면에 나타날 때 시작점
+            edgeOffset: 20,
+            backgroundColor: Colors.black,
+            color: Theme.of(context).primaryColor,
+            child: PageView.builder(
+              controller: _pageController,
+              scrollDirection: Axis.vertical,
+              itemCount: videos.length,
+              // onPageChanged - 현재 페이지 인덱스 위치를 알 수 있다.
+              onPageChanged: _onPageChanged,
+              itemBuilder: (context, index) =>
+                  VideoPost(onVideoFinished: _onVideoFinished, index: index),
+            ),
+          ),
+        );
   }
 }

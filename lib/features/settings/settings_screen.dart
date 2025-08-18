@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
@@ -8,26 +9,11 @@ import 'package:tiktok/features/videos/models/playback_config_model.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok/utils.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool value = false;
-
-  void _onSwitchChanged(bool? newValue) {
-    if (newValue == null) return;
-
-    setState(() {
-      value = newValue;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Localizations.override 위젯을 사용하여 앱의 로케일을 강제로 설정할 수 있다
     return Scaffold(
       appBar: AppBar(title: Text('Settings')),
@@ -83,28 +69,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
           //   subtitle: Text('videos muted by default'),
           // ),
           SwitchListTile.adaptive(
-            value: context.watch<PlaybackConfigViewModel>().muted,
-            onChanged: (value) =>
-                context.read<PlaybackConfigViewModel>().setMuted(value),
+            // value: context.watch<PlaybackConfigViewModel>().muted,
+            value: ref.watch(playbackConfigProvider).muted,
+            onChanged: (value) => {
+              ref.read(playbackConfigProvider.notifier).setMuted(value),
+            },
+            //     context.read<PlaybackConfigViewModel>().setMuted(value),
             title: Text('Mute video'),
             subtitle: Text('video will be muted.'),
           ),
           SwitchListTile.adaptive(
-            value: context.watch<PlaybackConfigViewModel>().autoPlay,
-            onChanged: (value) =>
-                context.read<PlaybackConfigViewModel>().setAutoPlay(value),
+            // value: context.watch<PlaybackConfigViewModel>().autoPlay,
+            value: ref.watch(playbackConfigProvider).autoPlay,
+            onChanged: (value) => {
+              ref.read(playbackConfigProvider.notifier).setAutoPlay(value),
+            },
+            // context.read<PlaybackConfigViewModel>().setAutoPlay(value),
             title: Text('AutoPlay'),
             subtitle: Text('video will start playing automatically'),
           ),
           SwitchListTile.adaptive(
-            value: value,
-            onChanged: _onSwitchChanged,
+            value: false,
+            onChanged: (value) {},
             title: Text('Enable Notifications'),
             subtitle: Text('They will be cute.'),
           ),
           CheckboxListTile.adaptive(
-            value: value,
-            onChanged: _onSwitchChanged,
+            value: false,
+            onChanged: (value) {},
             title: Text('Marketing emails'),
             subtitle: Text('we wont spam you'),
           ),
