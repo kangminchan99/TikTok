@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,6 +20,7 @@ import 'package:tiktok/features/inbox/activity_screen.dart';
 import 'package:tiktok/features/settings/settings_screen.dart';
 import 'package:tiktok/features/videos/repos/video_playback_config_repo.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
+import 'package:tiktok/firebase_options.dart';
 import 'package:tiktok/generated/l10n.dart';
 import 'package:tiktok/router.dart';
 import 'package:tiktok/utils.dart';
@@ -26,6 +28,8 @@ import 'package:tiktok/utils.dart';
 void main() async {
   // flutter engine과 framework를 묶는 접착제
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // GoRouter push로 웹 URL 변경 가능 설정
   GoRouter.optionURLReflectsImperativeAPIs = true;
   // 앱이 시작될 때 세로 모드로 고정
@@ -58,19 +62,19 @@ void main() async {
   );
 }
 
-class TikTokApp extends StatelessWidget {
+class TikTokApp extends ConsumerWidget {
   const TikTokApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // 영어로 강제 설정
     // S.load(Locale('en'));
     return ValueListenableBuilder(
       valueListenable: darkModeConfig,
       builder: (context, value, child) => MaterialApp.router(
-        routerConfig: router,
-        title: 'Flutter Demo',
+        routerConfig: ref.watch(routerProvider),
+        title: 'TikTok',
         // 일종의 번역 파일들을 불러옴
         localizationsDelegates: [
           // 플러터 기본 위젯들을 위한 번역본

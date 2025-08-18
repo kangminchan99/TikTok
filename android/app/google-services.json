@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "382499570970",
+    "project_id": "tiktok-minchan",
+    "storage_bucket": "tiktok-minchan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382499570970:android:74dd95fd32192c8bd698a3",
+        "android_client_info": {
+          "package_name": "com.minchan.tiktok"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdEZ2ibyyVze_5txKCf2hG9cxM4VvL65U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
