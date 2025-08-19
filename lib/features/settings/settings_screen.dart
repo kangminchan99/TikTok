@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
+import 'package:tiktok/features/authentication/repos/autentication_repo.dart';
 import 'package:tiktok/features/videos/models/playback_config_model.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok/utils.dart';
@@ -202,7 +204,10 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     CupertinoActionSheetAction(
                       isDestructiveAction: true,
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        ref.read(authRepo).signOut();
+                        context.go('/');
+                      },
                       child: Text('yes logout'),
                     ),
                   ],

@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '382499570970',
     projectId: 'tiktok-minchan',
     storageBucket: 'tiktok-minchan.firebasestorage.app',
+    iosClientId: '382499570970-ieiivmnnpdtqfjdjdg3l9d4knde4qico.apps.googleusercontent.com',
     iosBundleId: 'com.minchan.tiktok',
   );
 
