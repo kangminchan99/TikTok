@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -66,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '382499570970',
     projectId: 'tiktok-minchan',
     storageBucket: 'tiktok-minchan.firebasestorage.app',
+    androidClientId: '382499570970-ba2lquilss76i4udnrbfl0pigc8jnh1t.apps.googleusercontent.com',
     iosClientId: '382499570970-ieiivmnnpdtqfjdjdg3l9d4knde4qico.apps.googleusercontent.com',
     iosBundleId: 'com.minchan.tiktok',
   );
@@ -77,6 +75,17 @@ class DefaultFirebaseOptions {
     projectId: 'tiktok-minchan',
     authDomain: 'tiktok-minchan.firebaseapp.com',
     storageBucket: 'tiktok-minchan.firebasestorage.app',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDz4hv0tnSuvhNdvymkJEgwYhn1r7lZj38',
+    appId: '1:382499570970:ios:902bbfcdc7cd3ed0d698a3',
+    messagingSenderId: '382499570970',
+    projectId: 'tiktok-minchan',
+    storageBucket: 'tiktok-minchan.firebasestorage.app',
+    androidClientId: '382499570970-ba2lquilss76i4udnrbfl0pigc8jnh1t.apps.googleusercontent.com',
+    iosClientId: '382499570970-ieiivmnnpdtqfjdjdg3l9d4knde4qico.apps.googleusercontent.com',
+    iosBundleId: 'com.minchan.tiktok',
   );
 
 }

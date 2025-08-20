@@ -1,1 +1,57 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"tiktok-minchan","appId":"1:382499570970:android:74dd95fd32192c8bd698a3","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"tiktok-minchan","appId":"1:382499570970:ios:902bbfcdc7cd3ed0d698a3","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"tiktok-minchan","configurations":{"android":"1:382499570970:android:74dd95fd32192c8bd698a3","ios":"1:382499570970:ios:902bbfcdc7cd3ed0d698a3","web":"1:382499570970:web:c3ff1e07e5126b7ad698a3","windows":"1:382499570970:web:99905d39fb67767dd698a3"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "tiktok-minchan",
+          "appId": "1:382499570970:android:74dd95fd32192c8bd698a3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "tiktok-minchan",
+          "appId": "1:382499570970:ios:902bbfcdc7cd3ed0d698a3",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "tiktok-minchan",
+          "configurations": {
+            "android": "1:382499570970:android:74dd95fd32192c8bd698a3",
+            "ios": "1:382499570970:ios:902bbfcdc7cd3ed0d698a3",
+            "macos": "1:382499570970:ios:902bbfcdc7cd3ed0d698a3",
+            "web": "1:382499570970:web:c3ff1e07e5126b7ad698a3",
+            "windows": "1:382499570970:web:99905d39fb67767dd698a3"
+          }
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "tiktok-minchan",
+          "appId": "1:382499570970:ios:902bbfcdc7cd3ed0d698a3",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}
