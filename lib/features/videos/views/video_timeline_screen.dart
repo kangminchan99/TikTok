@@ -69,8 +69,14 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
               itemCount: videos.length,
               // onPageChanged - 현재 페이지 인덱스 위치를 알 수 있다.
               onPageChanged: _onPageChanged,
-              itemBuilder: (context, index) =>
-                  VideoPost(onVideoFinished: _onVideoFinished, index: index),
+              itemBuilder: (context, index) {
+                final videoData = videos[index];
+                return VideoPost(
+                  onVideoFinished: _onVideoFinished,
+                  index: index,
+                  videoData: videoData,
+                );
+              },
             ),
           ),
         );

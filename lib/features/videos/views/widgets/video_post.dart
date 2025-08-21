@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tiktok/common/widgets/video_configuration/video_config.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/features/videos/models/video_model.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok/features/videos/views/widgets/video_comments.dart';
@@ -16,10 +17,12 @@ import 'package:visibility_detector/visibility_detector.dart';
 class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
   final int index;
+  final VideoModel videoData;
   const VideoPost({
     super.key,
     required this.onVideoFinished,
     required this.index,
+    required this.videoData,
   });
 
   @override
@@ -172,7 +175,10 @@ class VideoPostState extends ConsumerState<VideoPost>
           Positioned.fill(
             child: _videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
-                : Container(color: Colors.black),
+                : Image.network(
+                    widget.videoData.thumbnailUrl,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Positioned.fill(child: GestureDetector(onTap: _onTogglePause)),
           // Position은 언제나 Stack의 자식 위젯으로 사용해야 하므로 다른 위젯으로 감싸면 안됨
@@ -237,7 +243,7 @@ class VideoPostState extends ConsumerState<VideoPost>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '@Minchan',
+                  '@${widget.videoData.creator}',
                   style: TextStyle(
                     fontSize: Sizes.size20,
                     color: Colors.white,
@@ -246,7 +252,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v10,
                 Text(
-                  'This is zzangu',
+                  widget.videoData.description,
                   style: TextStyle(fontSize: Sizes.size16, color: Colors.white),
                 ),
               ],
@@ -262,21 +268,24 @@ class VideoPostState extends ConsumerState<VideoPost>
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                   foregroundImage: NetworkImage(
-                    'https://avatars.githubusercontent.com/u/114412280?v=4',
+                    'https://firebasestorage.googleapis.com/v0/b/tiktok-minchan.firebasestorage.app/o/avatars%2F${widget.videoData.creatorUid}?alt=media&token=281b6dc4-ea1e-4710-8604-f2975e397826',
                   ),
-                  child: Text('민찬'),
+                  child: Text(
+                    widget.videoData.creator,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Gaps.v24,
                 VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: S.of(context).likeCount(98192112312),
+                  text: S.of(context).likeCount(widget.videoData.likes),
                 ),
                 Gaps.v24,
                 GestureDetector(
                   onTap: _onCommentTap,
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidComment,
-                    text: S.of(context).commentCount(435345),
+                    text: S.of(context).commentCount(widget.videoData.comments),
                   ),
                 ),
                 Gaps.v24,
