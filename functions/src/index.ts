@@ -1,5 +1,8 @@
 import * as admin from 'firebase-admin';
-import { onDocumentCreated } from 'firebase-functions/v2/firestore';
+import {
+  onDocumentCreated,
+  onDocumentDeleted,
+} from 'firebase-functions/v2/firestore';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { promises as fs } from 'fs';
@@ -103,5 +106,64 @@ export const onVideoCreated = onDocumentCreated(
     try {
       await fs.unlink(inputPath);
     } catch {}
+  }
+);
+
+export const onLikeCreated = onDocumentCreated(
+  {
+    document: 'likes/{likeId}',
+    region: 'asia-northeast3',
+  },
+  async (event) => {
+    const snap = event.data;
+    if (!snap) return;
+    const db = admin.firestore();
+    const id = snap.id;
+    const [videoId, userId] = id.split('000');
+
+    await db
+      .collection('videos')
+      .doc(videoId)
+      .update({
+        likes: admin.firestore.FieldValue.increment(1),
+      });
+
+    await db
+      .collection('users')
+      .doc(userId)
+      .collection('likes')
+      .doc(videoId)
+      .set({
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        videoId: videoId,
+      });
+  }
+);
+
+export const onLikeRemoved = onDocumentDeleted(
+  {
+    document: 'likes/{likeId}',
+    region: 'asia-northeast3',
+  },
+  async (event) => {
+    const snap = event.data;
+    if (!snap) return;
+    const db = admin.firestore();
+    const id = snap.id;
+    const [videoId, userId] = id.split('000');
+
+    await db
+      .collection('videos')
+      .doc(videoId)
+      .update({
+        likes: admin.firestore.FieldValue.increment(-1),
+      });
+
+    await db
+      .collection('users')
+      .doc(userId)
+      .collection('likes')
+      .doc(videoId)
+      .delete();
   }
 );

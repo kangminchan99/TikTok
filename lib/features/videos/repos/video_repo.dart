@@ -20,12 +20,37 @@ class VideoRepository {
     await _db.collection('videos').add(data.toJson());
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideos() {
-    return _db
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideos({
+    int? lastItemCreatedAt,
+  }) {
+    final query = _db
         .collection('videos')
-        .where('likes', isGreaterThan: 10)
         .orderBy('createdAt', descending: true)
-        .get();
+        .limit(2);
+    if (lastItemCreatedAt == null) {
+      return query.get();
+    } else {
+      return query.startAfter([lastItemCreatedAt]).get();
+    }
+  }
+
+  Future<bool> togglelikeVideo(String videoId, String userId) async {
+    final query = _db.collection('likes').doc('${videoId}000$userId');
+    final like = await query.get();
+
+    if (!like.exists) {
+      await query.set({'createdAt': DateTime.now().millisecondsSinceEpoch});
+      return true; // 좋아요됨
+    } else {
+      await query.delete();
+      return false; // 좋아요 취소됨
+    }
+  }
+
+  Future<bool> isLiked(String videoId, String userId) async {
+    final query = _db.collection('likes').doc('${videoId}000$userId');
+    final like = await query.get();
+    return like.exists;
   }
 }
 

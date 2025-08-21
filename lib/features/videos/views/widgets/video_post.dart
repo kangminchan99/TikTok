@@ -8,6 +8,7 @@ import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
 import 'package:tiktok/features/videos/models/video_model.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
+import 'package:tiktok/features/videos/view_models/video_post_view_model.dart';
 import 'package:tiktok/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktok/generated/l10n.dart';
@@ -37,6 +38,8 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   bool _localMuted = false;
 
+  late int _likeCount;
+
   // ChangeNotifier
   // bool _autoMute = videoConfig.autoMuted;
   // ValueNotifier
@@ -57,6 +60,8 @@ class VideoPostState extends ConsumerState<VideoPost>
       value: 1.5,
       duration: _animataionDuration,
     );
+
+    _likeCount = widget.videoData.likes;
 
     // context.read<PlaybackConfigViewModel>().addListener(
     //   _onPlaybackConfigChanged,
@@ -162,6 +167,20 @@ class VideoPostState extends ConsumerState<VideoPost>
     );
 
     _onTogglePause();
+  }
+
+  Future<void> _onToggleLikeTap() async {
+    final notifier = ref.read(videoPostProvider(widget.videoData.id).notifier);
+    final prevLiked =
+        ref.read(videoPostProvider(widget.videoData.id)).value ?? false;
+
+    // 옵티미스틱: 먼저 UI 반영
+    setState(() {
+      _likeCount += prevLiked ? -1 : 1;
+    });
+
+    // 실제 토글 (여기서 like/unlike 호출)
+    await notifier.toggleLikeVideo();
   }
 
   @override
@@ -276,20 +295,35 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 ),
                 Gaps.v24,
-                VideoButton(
-                  icon: FontAwesomeIcons.solidHeart,
-                  text: S.of(context).likeCount(widget.videoData.likes),
+                GestureDetector(
+                  onTap: _onToggleLikeTap,
+                  child: VideoButton(
+                    icon: FontAwesomeIcons.solidHeart,
+                    iconColor:
+                        ref
+                                .watch(videoPostProvider(widget.videoData.id))
+                                .value ==
+                            true
+                        ? Colors.red
+                        : Colors.white,
+                    text: S.of(context).likeCount(_likeCount),
+                  ),
                 ),
                 Gaps.v24,
                 GestureDetector(
                   onTap: _onCommentTap,
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidComment,
+                    iconColor: Colors.white,
                     text: S.of(context).commentCount(widget.videoData.comments),
                   ),
                 ),
                 Gaps.v24,
-                VideoButton(icon: FontAwesomeIcons.share, text: 'Share'),
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  iconColor: Colors.white,
+                  text: 'Share',
+                ),
               ],
             ),
           ),
