@@ -155,7 +155,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: Sizes.size16,
-                          color: isDark ? null : Colors.black,
+                          color: Colors.grey.shade500,
                         ),
                         children: [
                           TextSpan(

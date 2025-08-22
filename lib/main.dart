@@ -16,7 +16,7 @@ import 'package:tiktok/features/authentication/username_screen.dart';
 import 'package:tiktok/features/discover/discover_screen.dart';
 import 'package:tiktok/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok/features/onboarding/interests_screen.dart';
-import 'package:tiktok/features/inbox/activity_screen.dart';
+import 'package:tiktok/features/inbox/views/activity_screen.dart';
 import 'package:tiktok/features/settings/settings_screen.dart';
 import 'package:tiktok/features/videos/repos/video_playback_config_repo.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
