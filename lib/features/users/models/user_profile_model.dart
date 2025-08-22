@@ -31,8 +31,15 @@ class UserProfileModel {
       link = json['link'],
       hasAvatar = json['hasAvatar'];
 
-  Map<String, String> toJson() {
-    return {'uid': uid, 'email': email, 'name': name, 'bio': bio, 'link': link};
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'email': email,
+      'name': name,
+      'bio': bio,
+      'link': link,
+      'hasAvatar': hasAvatar,
+    };
   }
 
   UserProfileModel copyWith({
