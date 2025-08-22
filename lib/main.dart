@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,14 +23,23 @@ import 'package:tiktok/features/videos/repos/video_playback_config_repo.dart';
 import 'package:tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok/firebase_options.dart';
 import 'package:tiktok/generated/l10n.dart';
+import 'package:tiktok/notifications/notifications_provider.dart';
 import 'package:tiktok/router.dart';
 import 'package:tiktok/utils.dart';
+
+@pragma('vm:entry-point') // ★ 트리셰이킹 방지
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+}
 
 void main() async {
   // flutter engine과 framework를 묶는 접착제
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   // GoRouter push로 웹 URL 변경 가능 설정
   GoRouter.optionURLReflectsImperativeAPIs = true;
   // 앱이 시작될 때 세로 모드로 고정
