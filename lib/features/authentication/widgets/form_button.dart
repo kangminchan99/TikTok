@@ -15,7 +15,6 @@ class FormButton extends StatelessWidget {
         widthFactor: 1,
         child: AnimatedContainer(
           duration: Duration(milliseconds: 300),
-
           padding: EdgeInsets.symmetric(vertical: Sizes.size16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Sizes.size5),
