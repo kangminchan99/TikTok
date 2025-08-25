@@ -39,6 +39,7 @@ class VideoModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'fileUrl': fileUrl,
       'thumbnailUrl': thumbnailUrl,
